@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mini-foundry — operating console</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo">◈</span>
+    <div>
+      <h1>mini-foundry</h1>
+      <div class="sub">connect → pipeline → ontology → applications → AI</div>
+    </div>
+  </div>
+  <div class="identity">
+    <label for="userSelect">acting identity</label>
+    <select id="userSelect" title="All requests carry this identity; governance treats humans and agents identically."></select>
+    <span id="userBadges"></span>
+  </div>
+</header>
+
+<nav id="tabs">
+  <button data-tab="overview">Overview</button>
+  <button data-tab="connect">Connect</button>
+  <button data-tab="datasets">Datasets</button>
+  <button data-tab="pipelines">Pipelines</button>
+  <button data-tab="ontology">Ontology</button>
+  <button data-tab="objects">Objects</button>
+  <button data-tab="functions">Functions</button>
+  <button data-tab="actions">Actions</button>
+  <button data-tab="workshop">Workshop</button>
+  <button data-tab="analytics">Analytics</button>
+  <button data-tab="agent">AI Agent</button>
+  <button data-tab="governance">Governance</button>
+  <button data-tab="releases">Releases</button>
+</nav>
+
+<main id="main" aria-live="polite"></main>
+
+<footer>
+  <span>Transactions are commits · Funnel indexes, query service serves · actions are rule sets, not RPCs · agents are users</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

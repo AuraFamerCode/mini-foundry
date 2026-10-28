@@ -1,0 +1,13 @@
+{
+  "name": "mini-foundry",
+  "version": "0.1.0",
+  "description": "A working miniature of Palantir Foundry's architecture: Connect -> Pipeline -> Ontology -> Applications -> AI, with layered governance.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/run.js"
+  },
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

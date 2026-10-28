@@ -1,0 +1,8 @@
+[project]
+name = "foundry-engine"
+version = "0.1.0"
+description = "Polyglot ontology and incremental compute reference services"
+requires-python = ">=3.9"
+
+[tool.unittest]
+start-directory = "tests"

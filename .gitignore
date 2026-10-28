@@ -1,0 +1,13 @@
+# Rust
+/target/
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+# Node
+node_modules/
+# OS / env
+.DS_Store
+.env
+.env.*

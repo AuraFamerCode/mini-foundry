@@ -1,0 +1,2990 @@
+{
+ "sources": [
+  {
+   "rid": "src-3445379e0cf6",
+   "name": "parts-inventory.csv",
+   "adapter": "csv",
+   "config": {
+    "csv": "part_id,part_name,base,status,last_inspection,days_since_inspection,owner_email,severity\nP-1001,Brake Assembly A320, JFK,needs_review,2026-05-12,138,owner.p1001@airline.example,high\nP-1002,Landing Gear Strut,JFK,operational,2026-08-01,57,owner.p1002@airline.example,low\nP-1003,Hydraulic Pump 737,LAX,needs_review,2026-04-02,178,owner.p1003@airline.example,high\nP-1004,Cabin Pressure Valve,LAX,operational,2026-07-15,74,owner.p1004@airline.example,medium\nP-1005,APU Control Unit,SFO,monitoring,2026-06-20,99,owner.p1005@airline.example,medium"
+   },
+   "markings": [
+    "SAFETY"
+   ],
+   "createdAt": "2026-09-28T11:00:48.258Z"
+  },
+  {
+   "rid": "src-68bab619c908",
+   "name": "maintenance-db (JDBC)",
+   "adapter": "jdbc",
+   "config": {
+    "simulate": [
+     {
+      "wo_id": "WO-5001",
+      "part_id": "P-1001",
+      "issue": "Brake wear beyond limit",
+      "severity": "high",
+      "due_date": "2026-10-01",
+      "status": "open"
+     },
+     {
+      "wo_id": "WO-5002",
+      "part_id": "P-1003",
+      "issue": "Pressure drop detected",
+      "severity": "high",
+      "due_date": "2026-09-30",
+      "status": "open"
+     },
+     {
+      "wo_id": "WO-5003",
+      "part_id": "P-1005",
+      "issue": "Intermittent fault code",
+      "severity": "medium",
+      "due_date": "2026-10-15",
+      "status": "open"
+     }
+    ]
+   },
+   "markings": [
+    "SAFETY"
+   ],
+   "createdAt": "2026-09-28T11:00:48.265Z"
+  }
+ ],
+ "connections": [
+  {
+   "rid": "ln-2b1346eec8df",
+   "ts": "2026-09-28T11:00:48.266Z",
+   "sourceRid": "src-3445379e0cf6",
+   "sourceName": "parts-inventory.csv",
+   "adapter": "csv",
+   "datasetRid": "ds-f7eca43fa8b4",
+   "datasetName": "parts_raw",
+   "branch": "master",
+   "rowCount": 5,
+   "txRid": "tx-c762bdd0ce67"
+  },
+  {
+   "rid": "ln-b63ab3175069",
+   "ts": "2026-09-28T11:00:48.266Z",
+   "sourceRid": "src-68bab619c908",
+   "sourceName": "maintenance-db (JDBC)",
+   "adapter": "jdbc",
+   "datasetRid": "ds-3ed751a68cfe",
+   "datasetName": "work_orders_raw",
+   "branch": "master",
+   "rowCount": 3,
+   "txRid": "tx-465bb4fdc078"
+  }
+ ],
+ "datasets": [
+  {
+   "rid": "ds-f7eca43fa8b4",
+   "name": "parts_raw",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [
+    "SAFETY"
+   ],
+   "primaryKeyColumn": null,
+   "schema": [
+    {
+     "name": "part_id",
+     "type": "string"
+    },
+    {
+     "name": "part_name",
+     "type": "string"
+    },
+    {
+     "name": "base",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string"
+    },
+    {
+     "name": "last_inspection",
+     "type": "string"
+    },
+    {
+     "name": "days_since_inspection",
+     "type": "number"
+    },
+    {
+     "name": "owner_email",
+     "type": "string"
+    },
+    {
+     "name": "severity",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-c762bdd0ce67",
+       "ts": "2026-09-28T11:00:48.266Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "part_id": "P-1001",
+         "part_name": "Brake Assembly A320",
+         "base": "JFK",
+         "status": "needs_review",
+         "last_inspection": "2026-05-12",
+         "days_since_inspection": 138,
+         "owner_email": "owner.p1001@airline.example",
+         "severity": "high"
+        },
+        {
+         "part_id": "P-1002",
+         "part_name": "Landing Gear Strut",
+         "base": "JFK",
+         "status": "operational",
+         "last_inspection": "2026-08-01",
+         "days_since_inspection": 57,
+         "owner_email": "owner.p1002@airline.example",
+         "severity": "low"
+        },
+        {
+         "part_id": "P-1003",
+         "part_name": "Hydraulic Pump 737",
+         "base": "LAX",
+         "status": "needs_review",
+         "last_inspection": "2026-04-02",
+         "days_since_inspection": 178,
+         "owner_email": "owner.p1003@airline.example",
+         "severity": "high"
+        },
+        {
+         "part_id": "P-1004",
+         "part_name": "Cabin Pressure Valve",
+         "base": "LAX",
+         "status": "operational",
+         "last_inspection": "2026-07-15",
+         "days_since_inspection": 74,
+         "owner_email": "owner.p1004@airline.example",
+         "severity": "medium"
+        },
+        {
+         "part_id": "P-1005",
+         "part_name": "APU Control Unit",
+         "base": "SFO",
+         "status": "monitoring",
+         "last_inspection": "2026-06-20",
+         "days_since_inspection": 99,
+         "owner_email": "owner.p1005@airline.example",
+         "severity": "medium"
+        }
+       ],
+       "parentRows": [],
+       "note": "sync from source parts-inventory.csv (csv)"
+      }
+     ]
+    }
+   },
+   "inputs": [
+    "src-3445379e0cf6"
+   ],
+   "createdAt": "2026-09-28T11:00:48.266Z"
+  },
+  {
+   "rid": "ds-3ed751a68cfe",
+   "name": "work_orders_raw",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [
+    "SAFETY"
+   ],
+   "primaryKeyColumn": "wo_id",
+   "schema": [
+    {
+     "name": "wo_id",
+     "type": "string"
+    },
+    {
+     "name": "part_id",
+     "type": "string"
+    },
+    {
+     "name": "issue",
+     "type": "string"
+    },
+    {
+     "name": "severity",
+     "type": "string"
+    },
+    {
+     "name": "due_date",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-465bb4fdc078",
+       "ts": "2026-09-28T11:00:48.266Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "wo_id": "WO-5001",
+         "part_id": "P-1001",
+         "issue": "Brake wear beyond limit",
+         "severity": "high",
+         "due_date": "2026-10-01",
+         "status": "open"
+        },
+        {
+         "wo_id": "WO-5002",
+         "part_id": "P-1003",
+         "issue": "Pressure drop detected",
+         "severity": "high",
+         "due_date": "2026-09-30",
+         "status": "open"
+        },
+        {
+         "wo_id": "WO-5003",
+         "part_id": "P-1005",
+         "issue": "Intermittent fault code",
+         "severity": "medium",
+         "due_date": "2026-10-15",
+         "status": "open"
+        }
+       ],
+       "parentRows": [],
+       "note": "sync from source maintenance-db (JDBC) (jdbc)"
+      }
+     ]
+    }
+   },
+   "inputs": [
+    "src-68bab619c908"
+   ],
+   "createdAt": "2026-09-28T11:00:48.266Z"
+  },
+  {
+   "rid": "ds-c3f579e90968",
+   "name": "parts_enriched",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [],
+   "schema": [
+    {
+     "name": "part_id",
+     "type": "string"
+    },
+    {
+     "name": "part_name",
+     "type": "string"
+    },
+    {
+     "name": "base",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string"
+    },
+    {
+     "name": "last_inspection",
+     "type": "string"
+    },
+    {
+     "name": "days_since_inspection",
+     "type": "number"
+    },
+    {
+     "name": "owner_email",
+     "type": "string"
+    },
+    {
+     "name": "severity",
+     "type": "string"
+    },
+    {
+     "name": "wo_id",
+     "type": "string"
+    },
+    {
+     "name": "issue",
+     "type": "string"
+    },
+    {
+     "name": "due_date",
+     "type": "string"
+    },
+    {
+     "name": "wo_status",
+     "type": "string"
+    },
+    {
+     "name": "needs_action",
+     "type": "boolean"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-4e42accb209d",
+       "ts": "2026-09-28T11:00:48.267Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "part_id": "P-1001",
+         "part_name": "Brake Assembly A320",
+         "base": "JFK",
+         "last_inspection": "2026-05-12",
+         "days_since_inspection": 138,
+         "owner_email": "owner.p1001@airline.example",
+         "severity": "high",
+         "wo_id": "WO-5001",
+         "issue": "Brake wear beyond limit",
+         "due_date": "2026-10-01",
+         "wo_status": "open",
+         "status": "needs_review",
+         "needs_action": true
+        },
+        {
+         "part_id": "P-1002",
+         "part_name": "Landing Gear Strut",
+         "base": "JFK",
+         "last_inspection": "2026-08-01",
+         "days_since_inspection": 57,
+         "owner_email": "owner.p1002@airline.example",
+         "severity": "low",
+         "status": "operational",
+         "needs_action": false
+        },
+        {
+         "part_id": "P-1003",
+         "part_name": "Hydraulic Pump 737",
+         "base": "LAX",
+         "last_inspection": "2026-04-02",
+         "days_since_inspection": 178,
+         "owner_email": "owner.p1003@airline.example",
+         "severity": "high",
+         "wo_id": "WO-5002",
+         "issue": "Pressure drop detected",
+         "due_date": "2026-09-30",
+         "wo_status": "open",
+         "status": "needs_review",
+         "needs_action": true
+        },
+        {
+         "part_id": "P-1004",
+         "part_name": "Cabin Pressure Valve",
+         "base": "LAX",
+         "last_inspection": "2026-07-15",
+         "days_since_inspection": 74,
+         "owner_email": "owner.p1004@airline.example",
+         "severity": "medium",
+         "status": "operational",
+         "needs_action": false
+        },
+        {
+         "part_id": "P-1005",
+         "part_name": "APU Control Unit",
+         "base": "SFO",
+         "last_inspection": "2026-06-20",
+         "days_since_inspection": 99,
+         "owner_email": "owner.p1005@airline.example",
+         "severity": "medium",
+         "wo_id": "WO-5003",
+         "issue": "Intermittent fault code",
+         "due_date": "2026-10-15",
+         "wo_status": "open",
+         "status": "monitoring",
+         "needs_action": true
+        }
+       ],
+       "parentRows": [],
+       "note": "pipeline enrich_parts run"
+      }
+     ]
+    }
+   },
+   "inputs": [
+    "ds-f7eca43fa8b4",
+    "ds-3ed751a68cfe"
+   ],
+   "createdAt": "2026-09-28T11:00:48.267Z",
+   "primaryKeyColumn": "part_id"
+  },
+  {
+   "rid": "ds-parts-by-base",
+   "name": "parts_by_base",
+   "kind": "restricted_view",
+   "viewOf": "ds-c3f579e90968",
+   "policy": "user.attributes.base == base or user.attributes.base == \"*\"",
+   "markings": [],
+   "localMarkings": [],
+   "inputs": [
+    "ds-c3f579e90968"
+   ],
+   "branches": {
+    "master": {
+     "transactions": []
+    }
+   },
+   "schema": [
+    {
+     "name": "part_id",
+     "type": "string"
+    },
+    {
+     "name": "part_name",
+     "type": "string"
+    },
+    {
+     "name": "base",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string"
+    },
+    {
+     "name": "last_inspection",
+     "type": "string"
+    },
+    {
+     "name": "days_since_inspection",
+     "type": "number"
+    },
+    {
+     "name": "owner_email",
+     "type": "string"
+    },
+    {
+     "name": "severity",
+     "type": "string"
+    },
+    {
+     "name": "wo_id",
+     "type": "string"
+    },
+    {
+     "name": "issue",
+     "type": "string"
+    },
+    {
+     "name": "due_date",
+     "type": "string"
+    },
+    {
+     "name": "wo_status",
+     "type": "string"
+    },
+    {
+     "name": "needs_action",
+     "type": "boolean"
+    }
+   ]
+  },
+  {
+   "rid": "ds-5ea4991c945f",
+   "name": "writeback__Part",
+   "kind": "writeback",
+   "markings": [],
+   "localMarkings": [],
+   "primaryKeyColumn": null,
+   "schema": [
+    {
+     "name": "objectPk",
+     "type": "string"
+    },
+    {
+     "name": "op",
+     "type": "string"
+    },
+    {
+     "name": "patch",
+     "type": "json"
+    },
+    {
+     "name": "ts",
+     "type": "timestamp"
+    },
+    {
+     "name": "author",
+     "type": "string"
+    },
+    {
+     "name": "actionType",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": []
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.269Z",
+   "managedBy": "funnel"
+  },
+  {
+   "rid": "ds-e6c257a67e4d",
+   "name": "writeback__WorkOrder",
+   "kind": "writeback",
+   "markings": [],
+   "localMarkings": [],
+   "primaryKeyColumn": null,
+   "schema": [
+    {
+     "name": "objectPk",
+     "type": "string"
+    },
+    {
+     "name": "op",
+     "type": "string"
+    },
+    {
+     "name": "patch",
+     "type": "json"
+    },
+    {
+     "name": "ts",
+     "type": "timestamp"
+    },
+    {
+     "name": "author",
+     "type": "string"
+    },
+    {
+     "name": "actionType",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": []
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.269Z",
+   "managedBy": "funnel"
+  },
+  {
+   "rid": "ds-a50139fb9310",
+   "name": "bases_raw",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [
+    "SAFETY"
+   ],
+   "primaryKeyColumn": "base_id",
+   "schema": [
+    {
+     "name": "base_id",
+     "type": "string"
+    },
+    {
+     "name": "region",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-8e48ff2d92aa",
+       "ts": "2026-09-28T11:00:48.269Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "base_id": "JFK",
+         "region": "northeast"
+        },
+        {
+         "base_id": "LAX",
+         "region": "west"
+        },
+        {
+         "base_id": "SFO",
+         "region": "west"
+        }
+       ],
+       "parentRows": [],
+       "note": "seed"
+      }
+     ]
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.269Z"
+  },
+  {
+   "rid": "ds-1c1980f3ed73",
+   "name": "technicians_raw",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [
+    "SAFETY"
+   ],
+   "primaryKeyColumn": "tech_id",
+   "schema": [
+    {
+     "name": "tech_id",
+     "type": "string"
+    },
+    {
+     "name": "tech_name",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-9c891e7ea96b",
+       "ts": "2026-09-28T11:00:48.270Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "tech_id": "T-1",
+         "tech_name": "Sam"
+        },
+        {
+         "tech_id": "T-2",
+         "tech_name": "Priya"
+        }
+       ],
+       "parentRows": [],
+       "note": "seed"
+      }
+     ]
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  },
+  {
+   "rid": "ds-37888f74e1ec",
+   "name": "wo_assignments",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [
+    "SAFETY"
+   ],
+   "primaryKeyColumn": null,
+   "schema": [
+    {
+     "name": "wo_pk",
+     "type": "string"
+    },
+    {
+     "name": "tech_pk",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-21aa31477a9c",
+       "ts": "2026-09-28T11:00:48.270Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "wo_pk": "WO-5001",
+         "tech_pk": "T-1"
+        },
+        {
+         "wo_pk": "WO-5002",
+         "tech_pk": "T-1"
+        },
+        {
+         "wo_pk": "WO-5002",
+         "tech_pk": "T-2"
+        }
+       ],
+       "parentRows": [],
+       "note": "seed"
+      }
+     ]
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  },
+  {
+   "rid": "ds-2a30cffd8278",
+   "name": "visits_raw",
+   "kind": "dataset",
+   "markings": [
+    "SAFETY"
+   ],
+   "localMarkings": [
+    "SAFETY"
+   ],
+   "primaryKeyColumn": "visit_id",
+   "schema": [
+    {
+     "name": "visit_id",
+     "type": "string"
+    },
+    {
+     "name": "part_pk",
+     "type": "string"
+    },
+    {
+     "name": "tech_pk",
+     "type": "string"
+    },
+    {
+     "name": "visit_date",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": [
+      {
+       "txRid": "tx-c85f4805791b",
+       "ts": "2026-09-28T11:00:48.270Z",
+       "op": "SNAPSHOT",
+       "rows": [
+        {
+         "visit_id": "V-1",
+         "part_pk": "P-1001",
+         "tech_pk": "T-1",
+         "visit_date": "2026-09-20"
+        }
+       ],
+       "parentRows": [],
+       "note": "seed"
+      }
+     ]
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  },
+  {
+   "rid": "ds-41403456f811",
+   "name": "writeback__link__WorkOrderAssignees",
+   "kind": "writeback",
+   "markings": [],
+   "localMarkings": [],
+   "primaryKeyColumn": null,
+   "schema": [
+    {
+     "name": "fromPk",
+     "type": "string"
+    },
+    {
+     "name": "toPk",
+     "type": "string"
+    },
+    {
+     "name": "op",
+     "type": "string"
+    },
+    {
+     "name": "ts",
+     "type": "timestamp"
+    },
+    {
+     "name": "author",
+     "type": "string"
+    }
+   ],
+   "branches": {
+    "master": {
+     "transactions": []
+    }
+   },
+   "inputs": [],
+   "createdAt": "2026-09-28T11:00:48.270Z",
+   "managedBy": "ontology"
+  }
+ ],
+ "pipelines": [
+  {
+   "rid": "pipe-9dabedfbb71f",
+   "name": "enrich_parts",
+   "steps": [
+    {
+     "op": "select",
+     "dataset": "parts_raw"
+    },
+    {
+     "op": "filter",
+     "expr": "status != \"retired\""
+    },
+    {
+     "op": "rename",
+     "from": "status",
+     "to": "part_status"
+    },
+    {
+     "op": "join",
+     "otherDataset": "work_orders_raw",
+     "on": "part_id",
+     "how": "left"
+    },
+    {
+     "op": "rename",
+     "from": "status",
+     "to": "wo_status"
+    },
+    {
+     "op": "rename",
+     "from": "part_status",
+     "to": "status"
+    },
+    {
+     "op": "derive",
+     "name": "needs_action",
+     "expr": "severity == \"high\" or days_since_inspection > 90"
+    }
+   ],
+   "outputDataset": "parts_enriched",
+   "profile": {
+    "driverMemory": "SMALL",
+    "executorCores": "SMALL",
+    "executorMemory": "EXTRA_SMALL",
+    "executorMemoryOverhead": "SMALL",
+    "numExecutors": "ONE"
+   },
+   "profileHistory": [],
+   "createdAt": "2026-09-28T11:00:48.266Z"
+  }
+ ],
+ "pipelineRuns": [
+  {
+   "rid": "run-9e981747c177",
+   "ts": "2026-09-28T11:00:48.267Z",
+   "pipelineRid": "pipe-9dabedfbb71f",
+   "pipeline": "enrich_parts",
+   "branch": "master",
+   "input": "parts_raw",
+   "output": "parts_enriched",
+   "rowsIn": 5,
+   "rowsOut": 5,
+   "profile": {
+    "driverMemory": "SMALL",
+    "executorCores": "SMALL",
+    "executorMemory": "EXTRA_SMALL",
+    "executorMemoryOverhead": "SMALL",
+    "numExecutors": "ONE"
+   },
+   "profileSource": "explicit",
+   "profileNote": "using configured profile",
+   "usage": {
+    "driverMemoryGb": 2,
+    "executorMemoryGb": 4,
+    "executorCores": 1,
+    "numExecutors": 1
+   },
+   "txRid": "tx-4e42accb209d",
+   "provenance": [
+    {
+     "column": "part_id",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "part_name",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "base",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "status",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "last_inspection",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "days_since_inspection",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "owner_email",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "severity",
+     "step": 0,
+     "detail": "source column from parts_raw"
+    },
+    {
+     "column": "part_status",
+     "step": 2,
+     "detail": "renamed from 'status'"
+    },
+    {
+     "column": "wo_id",
+     "step": 3,
+     "detail": "joined from work_orders_raw on 'part_id'"
+    },
+    {
+     "column": "part_id",
+     "step": 3,
+     "detail": "joined from work_orders_raw on 'part_id'"
+    },
+    {
+     "column": "issue",
+     "step": 3,
+     "detail": "joined from work_orders_raw on 'part_id'"
+    },
+    {
+     "column": "severity",
+     "step": 3,
+     "detail": "joined from work_orders_raw on 'part_id'"
+    },
+    {
+     "column": "due_date",
+     "step": 3,
+     "detail": "joined from work_orders_raw on 'part_id'"
+    },
+    {
+     "column": "status",
+     "step": 3,
+     "detail": "joined from work_orders_raw on 'part_id'"
+    },
+    {
+     "column": "wo_status",
+     "step": 4,
+     "detail": "renamed from 'status'"
+    },
+    {
+     "column": "status",
+     "step": 5,
+     "detail": "renamed from 'part_status'"
+    },
+    {
+     "column": "needs_action",
+     "step": 6,
+     "detail": "derived via `severity == \"high\" or days_since_inspection > 90`"
+    }
+   ]
+  }
+ ],
+ "incrementalRuns": [],
+ "incrementalInputWatermarks": {},
+ "jobSpecs": [
+  {
+   "rid": "spec-c064ebe3a25c",
+   "kind": "incremental_transform",
+   "name": "partsNeedsAction",
+   "inputs": [
+    "parts_enriched"
+   ],
+   "output": "parts_needs_action",
+   "key": "part_id",
+   "snapshotInputs": [],
+   "semanticVersion": 1,
+   "requireIncremental": true,
+   "strictAppend": true,
+   "v2Semantics": false,
+   "allowRetention": false,
+   "expression": "status == \"needs_review\" or days_since_inspection > 90",
+   "configure": {
+    "profile": null,
+    "allowedRunDuration": null,
+    "checkpointOutputs": false,
+    "backend": "spark",
+    "lightweight": false
+   },
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  },
+  {
+   "rid": "spec-98c44efc08d1",
+   "kind": "pipeline",
+   "name": "enrichPartsJob",
+   "pipelineRid": "pipe-9dabedfbb71f",
+   "inputs": [
+    "parts_raw"
+   ],
+   "output": "parts_enriched",
+   "configure": {
+    "profile": {
+     "driverMemory": "SMALL",
+     "executorCores": "SMALL",
+     "executorMemory": "EXTRA_SMALL",
+     "executorMemoryOverhead": "SMALL",
+     "numExecutors": "ONE"
+    },
+    "backend": "spark",
+    "lightweight": false
+   }
+  }
+ ],
+ "jobs": [],
+ "builds": [],
+ "schedules": [
+  {
+   "rid": "sched-8cff06cd56f7",
+   "name": "maintenance-refresh",
+   "targets": [
+    "partsNeedsAction"
+   ],
+   "trigger": {
+    "kind": "any",
+    "components": [
+     {
+      "type": "event",
+      "dataset": "parts_raw"
+     },
+     {
+      "type": "event",
+      "dataset": "work_orders_raw"
+     }
+    ]
+   },
+   "buildType": "force",
+   "maxRetries": 3,
+   "state": "idle",
+   "lastRun": null,
+   "pendingReRun": false,
+   "runs": 0,
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "objectTypes": [
+  {
+   "rid": "ot-2fca0e867f3d",
+   "name": "Part",
+   "display": "Aircraft Part",
+   "primaryKey": "part_id",
+   "titleKey": "part_name",
+   "titleIndependent": true,
+   "properties": [
+    {
+     "name": "part_id",
+     "type": "string",
+     "backingColumn": "part_id"
+    },
+    {
+     "name": "part_name",
+     "type": "string",
+     "backingColumn": "part_name"
+    },
+    {
+     "name": "base",
+     "type": "string",
+     "backingColumn": "base"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "backingColumn": "status"
+    },
+    {
+     "name": "last_inspection",
+     "type": "string",
+     "backingColumn": "last_inspection"
+    },
+    {
+     "name": "days_since_inspection",
+     "type": "number",
+     "backingColumn": "days_since_inspection"
+    },
+    {
+     "name": "owner_email",
+     "type": "string",
+     "requiredMarking": "PII",
+     "backingColumn": "owner_email"
+    },
+    {
+     "name": "severity",
+     "type": "string",
+     "backingColumn": "severity"
+    },
+    {
+     "name": "wo_status",
+     "type": "string",
+     "backingColumn": "wo_status"
+    },
+    {
+     "name": "needs_action",
+     "type": "boolean",
+     "backingColumn": "needs_action"
+    }
+   ],
+   "markings": [
+    "SAFETY"
+   ],
+   "backing": {
+    "datasetRid": "ds-c3f579e90968",
+    "datasetName": "parts_enriched",
+    "mode": "batch"
+   },
+   "createdAt": "2026-09-28T11:00:48.268Z"
+  },
+  {
+   "rid": "ot-a83f1660eab7",
+   "name": "WorkOrder",
+   "display": "Maintenance Work Order",
+   "primaryKey": "wo_id",
+   "titleKey": "issue",
+   "titleIndependent": true,
+   "properties": [
+    {
+     "name": "wo_id",
+     "type": "string",
+     "backingColumn": "wo_id"
+    },
+    {
+     "name": "part_id",
+     "type": "string",
+     "backingColumn": "part_id"
+    },
+    {
+     "name": "issue",
+     "type": "string",
+     "backingColumn": "issue"
+    },
+    {
+     "name": "severity",
+     "type": "string",
+     "backingColumn": "severity"
+    },
+    {
+     "name": "due_date",
+     "type": "string",
+     "backingColumn": "due_date"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "backingColumn": "status"
+    },
+    {
+     "name": "resolution_note",
+     "type": "string",
+     "backingColumn": null
+    }
+   ],
+   "markings": [
+    "SAFETY"
+   ],
+   "backing": {
+    "datasetRid": "ds-3ed751a68cfe",
+    "datasetName": "work_orders_raw",
+    "mode": "batch"
+   },
+   "createdAt": "2026-09-28T11:00:48.268Z"
+  },
+  {
+   "rid": "ot-85c9e5d0f5b3",
+   "name": "Base",
+   "display": "Maintenance Base",
+   "primaryKey": "base_id",
+   "titleKey": "base_id",
+   "titleIndependent": false,
+   "properties": [
+    {
+     "name": "base_id",
+     "type": "string",
+     "backingColumn": "base_id"
+    },
+    {
+     "name": "region",
+     "type": "string",
+     "backingColumn": "region"
+    }
+   ],
+   "markings": [
+    "SAFETY"
+   ],
+   "backing": {
+    "datasetRid": "ds-a50139fb9310",
+    "datasetName": "bases_raw",
+    "mode": "batch"
+   },
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  },
+  {
+   "rid": "ot-0e43f76e3541",
+   "name": "Technician",
+   "display": "Technician",
+   "primaryKey": "tech_id",
+   "titleKey": "tech_name",
+   "titleIndependent": true,
+   "properties": [
+    {
+     "name": "tech_id",
+     "type": "string",
+     "backingColumn": "tech_id"
+    },
+    {
+     "name": "tech_name",
+     "type": "string",
+     "backingColumn": "tech_name"
+    }
+   ],
+   "markings": [
+    "SAFETY"
+   ],
+   "backing": {
+    "datasetRid": "ds-1c1980f3ed73",
+    "datasetName": "technicians_raw",
+    "mode": "batch"
+   },
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  },
+  {
+   "rid": "ot-28b61e933b3c",
+   "name": "MaintenanceVisit",
+   "display": "Maintenance Visit",
+   "primaryKey": "visit_id",
+   "titleKey": "visit_id",
+   "titleIndependent": false,
+   "properties": [
+    {
+     "name": "visit_id",
+     "type": "string",
+     "backingColumn": "visit_id"
+    },
+    {
+     "name": "part_pk",
+     "type": "string",
+     "backingColumn": "part_pk"
+    },
+    {
+     "name": "tech_pk",
+     "type": "string",
+     "backingColumn": "tech_pk"
+    },
+    {
+     "name": "visit_date",
+     "type": "string",
+     "backingColumn": "visit_date"
+    }
+   ],
+   "markings": [
+    "SAFETY"
+   ],
+   "backing": {
+    "datasetRid": "ds-2a30cffd8278",
+    "datasetName": "visits_raw",
+    "mode": "batch"
+   },
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  }
+ ],
+ "linkTypes": [
+  {
+   "rid": "lt-e5e6c4fe412f",
+   "name": "PartWorkOrders",
+   "fromType": "Part",
+   "toType": "WorkOrder",
+   "cardinality": "one-to-many",
+   "createdAt": "2026-09-28T11:00:48.268Z"
+  },
+  {
+   "rid": "lt-d05ed030f2be",
+   "name": "WorkOrderPart",
+   "fromType": "WorkOrder",
+   "toType": "Part",
+   "cardinality": "many-to-one",
+   "backing": {
+    "kind": "foreign_key",
+    "fkProperty": "part_id",
+    "fkColumn": "part_id",
+    "referencesPrimaryKey": "part_id"
+   },
+   "latencyTier": "derived-instant",
+   "createdAt": "2026-09-28T11:00:48.270Z"
+  },
+  {
+   "rid": "lt-b5f7eeaa8008",
+   "name": "WorkOrderAssignees",
+   "fromType": "WorkOrder",
+   "toType": "Technician",
+   "cardinality": "many-to-many",
+   "backing": {
+    "kind": "join_table",
+    "joinTableDataset": "wo_assignments",
+    "leftColumn": "wo_pk",
+    "rightColumn": "tech_pk"
+   },
+   "latencyTier": "batch-cadence",
+   "createdAt": "2026-09-28T11:00:48.270Z",
+   "lastSyncTxRid": "tx-21aa31477a9c"
+  },
+  {
+   "rid": "lt-a5fd9ab81001",
+   "name": "PartVisits",
+   "fromType": "Part",
+   "toType": "MaintenanceVisit",
+   "cardinality": "many-to-many",
+   "backing": {
+    "kind": "object_backed",
+    "manifestObjectType": "MaintenanceVisit",
+    "leftProperty": "part_pk",
+    "rightProperty": "visit_id"
+   },
+   "latencyTier": "batch-cadence",
+   "createdAt": "2026-09-28T11:00:48.270Z",
+   "lastSyncTxRid": "tx-c85f4805791b"
+  }
+ ],
+ "interfaces": [
+  {
+   "rid": "if-cf99d13eec87",
+   "name": "Triageable",
+   "extends": [],
+   "description": "Anything that can be triaged: carries status + severity and is targetable by triage actions.",
+   "properties": [
+    {
+     "name": "status",
+     "baseType": "string",
+     "required": true
+    },
+    {
+     "name": "severity",
+     "baseType": "string",
+     "required": true
+    },
+    {
+     "name": "triageNotes",
+     "baseType": "string",
+     "required": false
+    }
+   ],
+   "linkConstraints": [],
+   "actionConstraints": [
+    {
+     "actionName": "closeWorkOrder"
+    }
+   ],
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "interfaceImpls": [
+  {
+   "interfaceName": "Triageable",
+   "objectTypeName": "Part",
+   "propertyMapping": [
+    {
+     "interfaceProperty": "status",
+     "localProperty": "status",
+     "baseType": "string",
+     "required": true
+    },
+    {
+     "interfaceProperty": "severity",
+     "localProperty": "severity",
+     "baseType": "string",
+     "required": true
+    },
+    {
+     "interfaceProperty": "triageNotes",
+     "localProperty": null,
+     "baseType": "string",
+     "required": false,
+     "skipped": true
+    }
+   ],
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  },
+  {
+   "interfaceName": "Triageable",
+   "objectTypeName": "WorkOrder",
+   "propertyMapping": [
+    {
+     "interfaceProperty": "status",
+     "localProperty": "status",
+     "baseType": "string",
+     "required": true
+    },
+    {
+     "interfaceProperty": "severity",
+     "localProperty": "severity",
+     "baseType": "string",
+     "required": true
+    },
+    {
+     "interfaceProperty": "triageNotes",
+     "localProperty": null,
+     "baseType": "string",
+     "required": false,
+     "skipped": true
+    }
+   ],
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "indexes": [
+  {
+   "rid": "idx-ca98f88b16a0",
+   "objectType": "Part",
+   "backingDatasetRid": "ds-c3f579e90968",
+   "syncMode": "batch",
+   "objects": {
+    "P-1001": {
+     "part_id": "P-1001",
+     "part_name": "Brake Assembly A320",
+     "base": "JFK",
+     "status": "needs_review",
+     "last_inspection": "2026-05-12",
+     "days_since_inspection": 138,
+     "owner_email": "owner.p1001@airline.example",
+     "severity": "high",
+     "wo_status": "open",
+     "needs_action": true
+    },
+    "P-1002": {
+     "part_id": "P-1002",
+     "part_name": "Landing Gear Strut",
+     "base": "JFK",
+     "status": "operational",
+     "last_inspection": "2026-08-01",
+     "days_since_inspection": 57,
+     "owner_email": "owner.p1002@airline.example",
+     "severity": "low",
+     "needs_action": false
+    },
+    "P-1003": {
+     "part_id": "P-1003",
+     "part_name": "Hydraulic Pump 737",
+     "base": "LAX",
+     "status": "needs_review",
+     "last_inspection": "2026-04-02",
+     "days_since_inspection": 178,
+     "owner_email": "owner.p1003@airline.example",
+     "severity": "high",
+     "wo_status": "open",
+     "needs_action": true
+    },
+    "P-1004": {
+     "part_id": "P-1004",
+     "part_name": "Cabin Pressure Valve",
+     "base": "LAX",
+     "status": "operational",
+     "last_inspection": "2026-07-15",
+     "days_since_inspection": 74,
+     "owner_email": "owner.p1004@airline.example",
+     "severity": "medium",
+     "needs_action": false
+    },
+    "P-1005": {
+     "part_id": "P-1005",
+     "part_name": "APU Control Unit",
+     "base": "SFO",
+     "status": "monitoring",
+     "last_inspection": "2026-06-20",
+     "days_since_inspection": 99,
+     "owner_email": "owner.p1005@airline.example",
+     "severity": "medium",
+     "wo_status": "open",
+     "needs_action": true
+    }
+   },
+   "sourceRows": {
+    "P-1001": {
+     "part_id": "P-1001",
+     "part_name": "Brake Assembly A320",
+     "base": "JFK",
+     "status": "needs_review",
+     "last_inspection": "2026-05-12",
+     "days_since_inspection": 138,
+     "owner_email": "owner.p1001@airline.example",
+     "severity": "high",
+     "wo_status": "open",
+     "needs_action": true
+    },
+    "P-1002": {
+     "part_id": "P-1002",
+     "part_name": "Landing Gear Strut",
+     "base": "JFK",
+     "status": "operational",
+     "last_inspection": "2026-08-01",
+     "days_since_inspection": 57,
+     "owner_email": "owner.p1002@airline.example",
+     "severity": "low",
+     "needs_action": false
+    },
+    "P-1003": {
+     "part_id": "P-1003",
+     "part_name": "Hydraulic Pump 737",
+     "base": "LAX",
+     "status": "needs_review",
+     "last_inspection": "2026-04-02",
+     "days_since_inspection": 178,
+     "owner_email": "owner.p1003@airline.example",
+     "severity": "high",
+     "wo_status": "open",
+     "needs_action": true
+    },
+    "P-1004": {
+     "part_id": "P-1004",
+     "part_name": "Cabin Pressure Valve",
+     "base": "LAX",
+     "status": "operational",
+     "last_inspection": "2026-07-15",
+     "days_since_inspection": 74,
+     "owner_email": "owner.p1004@airline.example",
+     "severity": "medium",
+     "needs_action": false
+    },
+    "P-1005": {
+     "part_id": "P-1005",
+     "part_name": "APU Control Unit",
+     "base": "SFO",
+     "status": "monitoring",
+     "last_inspection": "2026-06-20",
+     "days_since_inspection": 99,
+     "owner_email": "owner.p1005@airline.example",
+     "severity": "medium",
+     "wo_status": "open",
+     "needs_action": true
+    }
+   },
+   "objectVersions": {
+    "P-1001": "v1",
+    "P-1002": "v2",
+    "P-1003": "v3",
+    "P-1004": "v4",
+    "P-1005": "v5"
+   },
+   "editOverlay": {},
+   "editLogTxRid": null,
+   "primaryKey": "part_id",
+   "nextObjectVersion": 5,
+   "projectionSignature": "[[\"part_id\",\"string\",\"part_id\"],[\"part_name\",\"string\",\"part_name\"],[\"base\",\"string\",\"base\"],[\"status\",\"string\",\"status\"],[\"last_inspection\",\"string\",\"last_inspection\"],[\"days_since_inspection\",\"number\",\"days_since_inspection\"],[\"owner_email\",\"string\",\"owner_email\"],[\"severity\",\"string\",\"severity\"],[\"wo_status\",\"string\",\"wo_status\"],[\"needs_action\",\"boolean\",\"needs_action\"]]",
+   "links": [
+    {
+     "linkType": "PartWorkOrders",
+     "fromPk": "P-1001",
+     "toPk": "WO-5001"
+    },
+    {
+     "linkType": "PartWorkOrders",
+     "fromPk": "P-1003",
+     "toPk": "WO-5002"
+    },
+    {
+     "linkType": "PartWorkOrders",
+     "fromPk": "P-1005",
+     "toPk": "WO-5003"
+    },
+    {
+     "linkType": "PartVisits",
+     "fromPk": "P-1001",
+     "toPk": "V-1"
+    }
+   ],
+   "lastTxRid": "tx-4e42accb209d",
+   "stats": {
+    "indexedObjects": 5,
+    "lastSync": "2026-09-28T11:00:48.268Z",
+    "incrementalWrites": 5
+   }
+  },
+  {
+   "rid": "idx-65697d15ea24",
+   "objectType": "WorkOrder",
+   "backingDatasetRid": "ds-3ed751a68cfe",
+   "syncMode": "batch",
+   "objects": {
+    "WO-5001": {
+     "wo_id": "WO-5001",
+     "part_id": "P-1001",
+     "issue": "Brake wear beyond limit",
+     "severity": "high",
+     "due_date": "2026-10-01",
+     "status": "open"
+    },
+    "WO-5002": {
+     "wo_id": "WO-5002",
+     "part_id": "P-1003",
+     "issue": "Pressure drop detected",
+     "severity": "high",
+     "due_date": "2026-09-30",
+     "status": "open"
+    },
+    "WO-5003": {
+     "wo_id": "WO-5003",
+     "part_id": "P-1005",
+     "issue": "Intermittent fault code",
+     "severity": "medium",
+     "due_date": "2026-10-15",
+     "status": "open"
+    }
+   },
+   "sourceRows": {
+    "WO-5001": {
+     "wo_id": "WO-5001",
+     "part_id": "P-1001",
+     "issue": "Brake wear beyond limit",
+     "severity": "high",
+     "due_date": "2026-10-01",
+     "status": "open"
+    },
+    "WO-5002": {
+     "wo_id": "WO-5002",
+     "part_id": "P-1003",
+     "issue": "Pressure drop detected",
+     "severity": "high",
+     "due_date": "2026-09-30",
+     "status": "open"
+    },
+    "WO-5003": {
+     "wo_id": "WO-5003",
+     "part_id": "P-1005",
+     "issue": "Intermittent fault code",
+     "severity": "medium",
+     "due_date": "2026-10-15",
+     "status": "open"
+    }
+   },
+   "objectVersions": {
+    "WO-5001": "v1",
+    "WO-5002": "v2",
+    "WO-5003": "v3"
+   },
+   "editOverlay": {},
+   "editLogTxRid": null,
+   "primaryKey": "wo_id",
+   "nextObjectVersion": 3,
+   "projectionSignature": "[[\"wo_id\",\"string\",\"wo_id\"],[\"part_id\",\"string\",\"part_id\"],[\"issue\",\"string\",\"issue\"],[\"severity\",\"string\",\"severity\"],[\"due_date\",\"string\",\"due_date\"],[\"status\",\"string\",\"status\"],[\"resolution_note\",\"string\",\"resolution_note\"]]",
+   "links": [
+    {
+     "linkType": "WorkOrderAssignees",
+     "fromPk": "WO-5001",
+     "toPk": "T-1"
+    },
+    {
+     "linkType": "WorkOrderAssignees",
+     "fromPk": "WO-5002",
+     "toPk": "T-1"
+    },
+    {
+     "linkType": "WorkOrderAssignees",
+     "fromPk": "WO-5002",
+     "toPk": "T-2"
+    }
+   ],
+   "lastTxRid": "tx-465bb4fdc078",
+   "stats": {
+    "indexedObjects": 3,
+    "lastSync": "2026-09-28T11:00:48.268Z",
+    "incrementalWrites": 3
+   }
+  },
+  {
+   "rid": "idx-9698ae5b8eae",
+   "objectType": "Base",
+   "backingDatasetRid": "ds-a50139fb9310",
+   "syncMode": "batch",
+   "objects": {
+    "JFK": {
+     "base_id": "JFK",
+     "region": "northeast"
+    },
+    "LAX": {
+     "base_id": "LAX",
+     "region": "west"
+    },
+    "SFO": {
+     "base_id": "SFO",
+     "region": "west"
+    }
+   },
+   "sourceRows": {
+    "JFK": {
+     "base_id": "JFK",
+     "region": "northeast"
+    },
+    "LAX": {
+     "base_id": "LAX",
+     "region": "west"
+    },
+    "SFO": {
+     "base_id": "SFO",
+     "region": "west"
+    }
+   },
+   "objectVersions": {
+    "JFK": "v1",
+    "LAX": "v2",
+    "SFO": "v3"
+   },
+   "editOverlay": {},
+   "editLogTxRid": null,
+   "primaryKey": "base_id",
+   "nextObjectVersion": 3,
+   "projectionSignature": "[[\"base_id\",\"string\",\"base_id\"],[\"region\",\"string\",\"region\"]]",
+   "links": [],
+   "lastTxRid": "tx-8e48ff2d92aa",
+   "stats": {
+    "indexedObjects": 3,
+    "lastSync": "2026-09-28T11:00:48.270Z",
+    "incrementalWrites": 3
+   }
+  },
+  {
+   "rid": "idx-f4de5da6b229",
+   "objectType": "Technician",
+   "backingDatasetRid": "ds-1c1980f3ed73",
+   "syncMode": "batch",
+   "objects": {
+    "T-1": {
+     "tech_id": "T-1",
+     "tech_name": "Sam"
+    },
+    "T-2": {
+     "tech_id": "T-2",
+     "tech_name": "Priya"
+    }
+   },
+   "sourceRows": {
+    "T-1": {
+     "tech_id": "T-1",
+     "tech_name": "Sam"
+    },
+    "T-2": {
+     "tech_id": "T-2",
+     "tech_name": "Priya"
+    }
+   },
+   "objectVersions": {
+    "T-1": "v1",
+    "T-2": "v2"
+   },
+   "editOverlay": {},
+   "editLogTxRid": null,
+   "primaryKey": "tech_id",
+   "nextObjectVersion": 2,
+   "projectionSignature": "[[\"tech_id\",\"string\",\"tech_id\"],[\"tech_name\",\"string\",\"tech_name\"]]",
+   "links": [],
+   "lastTxRid": "tx-9c891e7ea96b",
+   "stats": {
+    "indexedObjects": 2,
+    "lastSync": "2026-09-28T11:00:48.270Z",
+    "incrementalWrites": 2
+   }
+  },
+  {
+   "rid": "idx-05266e6afc08",
+   "objectType": "MaintenanceVisit",
+   "backingDatasetRid": "ds-2a30cffd8278",
+   "syncMode": "batch",
+   "objects": {
+    "V-1": {
+     "visit_id": "V-1",
+     "part_pk": "P-1001",
+     "tech_pk": "T-1",
+     "visit_date": "2026-09-20"
+    }
+   },
+   "sourceRows": {
+    "V-1": {
+     "visit_id": "V-1",
+     "part_pk": "P-1001",
+     "tech_pk": "T-1",
+     "visit_date": "2026-09-20"
+    }
+   },
+   "objectVersions": {
+    "V-1": "v1"
+   },
+   "editOverlay": {},
+   "editLogTxRid": null,
+   "primaryKey": "visit_id",
+   "nextObjectVersion": 1,
+   "projectionSignature": "[[\"visit_id\",\"string\",\"visit_id\"],[\"part_pk\",\"string\",\"part_pk\"],[\"tech_pk\",\"string\",\"tech_pk\"],[\"visit_date\",\"string\",\"visit_date\"]]",
+   "links": [],
+   "lastTxRid": "tx-c85f4805791b",
+   "stats": {
+    "indexedObjects": 1,
+    "lastSync": "2026-09-28T11:00:48.270Z",
+    "incrementalWrites": 1
+   }
+  }
+ ],
+ "writebackDatasets": [
+  {
+   "objectType": "Part",
+   "datasetRid": "ds-5ea4991c945f",
+   "datasetName": "writeback__Part",
+   "configuredAt": "2026-09-28T11:00:48.269Z"
+  },
+  {
+   "objectType": "WorkOrder",
+   "datasetRid": "ds-e6c257a67e4d",
+   "datasetName": "writeback__WorkOrder",
+   "configuredAt": "2026-09-28T11:00:48.269Z"
+  }
+ ],
+ "linkWritebackDatasets": [
+  {
+   "linkName": "WorkOrderAssignees",
+   "datasetRid": "ds-41403456f811",
+   "datasetName": "writeback__link__WorkOrderAssignees",
+   "configuredAt": "2026-09-28T11:00:48.270Z"
+  }
+ ],
+ "functions": [
+  {
+   "rid": "fn-21b9e8bb7d0d",
+   "name": "triagePart",
+   "description": "Escalate a part to needs_review, create a work order, and link them.",
+   "params": [
+    {
+     "name": "partId",
+     "type": "string",
+     "required": true
+    },
+    {
+     "name": "reason",
+     "type": "string",
+     "required": true
+    }
+   ],
+   "steps": [
+    {
+     "op": "get",
+     "type": "Part",
+     "pk": {
+      "$param": "partId"
+     },
+     "as": "part"
+    },
+    {
+     "op": "require",
+     "expression": "part != null",
+     "message": "Part not found"
+    },
+    {
+     "op": "modify",
+     "type": "Part",
+     "pk": {
+      "$ref": "part.part_id"
+     },
+     "patch": {
+      "status": "needs_review"
+     }
+    },
+    {
+     "op": "generate_id",
+     "as": "woId",
+     "prefix": "WO-"
+    },
+    {
+     "op": "create",
+     "type": "WorkOrder",
+     "values": {
+      "wo_id": {
+       "$ref": "woId"
+      },
+      "part_id": {
+       "$ref": "part.part_id"
+      },
+      "issue": {
+       "$param": "reason"
+      },
+      "severity": "high",
+      "due_date": "2026-12-01"
+     }
+    },
+    {
+     "op": "link",
+     "link": "PartWorkOrders",
+     "from": {
+      "$ref": "part.part_id"
+     },
+     "to": {
+      "$ref": "woId"
+     }
+    },
+    {
+     "op": "log",
+     "values": [
+      "triaged ",
+      {
+       "$ref": "part.part_id"
+      },
+      " with new work order ",
+      {
+       "$ref": "woId"
+      }
+     ]
+    }
+   ],
+   "result": {
+    "escalated": {
+     "$ref": "part.part_id"
+    },
+    "workOrder": {
+     "$ref": "woId"
+    }
+   },
+   "createdAt": "2026-09-28T11:00:48.269Z"
+  }
+ ],
+ "functionRuns": [],
+ "actionTypes": [
+  {
+   "rid": "at-88b2ad3a43a0",
+   "name": "closeWorkOrder",
+   "description": "Mark a work order closed and update the part status.",
+   "parameters": [
+    {
+     "name": "workOrder",
+     "type": "object-reference",
+     "objectType": "WorkOrder",
+     "required": true
+    },
+    {
+     "name": "resolution",
+     "type": "string",
+     "required": true
+    },
+    {
+     "name": "justification",
+     "type": "string",
+     "required": false
+    }
+   ],
+   "rules": [
+    {
+     "kind": "modify",
+     "objectParameter": "workOrder",
+     "propertyMap": {
+      "status": {
+       "kind": "static",
+       "value": "CLOSED"
+      },
+      "resolution_note": {
+       "kind": "fromParameter",
+       "param": "resolution"
+      }
+     }
+    }
+   ],
+   "submissionCriteria": [
+    {
+     "expr": "resolution != \"\"",
+     "errorMessage": "Provide a resolution before closing."
+    },
+    {
+     "expr": "workOrder.severity != \"high\" or justification",
+     "errorMessage": "Closing a high-severity work order requires a written justification."
+    }
+   ],
+   "overrides": [
+    {
+     "name": "manager justification override",
+     "conditions": [
+      {
+       "expr": "user.attributes.role == \"manager\""
+      }
+     ],
+     "then": [
+      {
+       "param": "justification",
+       "required": true,
+       "visible": true
+      }
+     ]
+    }
+   ],
+   "writeAuthorization": {
+    "requiredMarking": "SAFETY"
+   },
+   "sideEffectsOnBranch": false,
+   "createdAt": "2026-09-28T11:00:48.269Z"
+  },
+  {
+   "rid": "at-a92d18bab5c3",
+   "name": "escalatePart",
+   "description": "Escalate a part: flip status and notify safety ops.",
+   "parameters": [
+    {
+     "name": "part",
+     "type": "object-reference",
+     "objectType": "Part",
+     "required": true
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "required": false
+    }
+   ],
+   "rules": [
+    {
+     "kind": "function",
+     "function": "triagePart",
+     "paramMap": {
+      "partId": "part",
+      "reason": {
+       "kind": "static",
+       "value": "Escalated via escalatePart action"
+      }
+     }
+    }
+   ],
+   "submissionCriteria": [],
+   "overrides": [],
+   "writeAuthorization": {
+    "requiredMarking": "SAFETY"
+   },
+   "sideEffectsOnBranch": false,
+   "createdAt": "2026-09-28T11:00:48.269Z"
+  },
+  {
+   "rid": "at-8ae7cbf250b4",
+   "name": "notifySafetyDesk",
+   "description": "Fire the safety-desk webhook (used to demo branch suppression).",
+   "parameters": [],
+   "rules": [
+    {
+     "kind": "webhook",
+     "webhookName": "safety-desk-inbox"
+    }
+   ],
+   "submissionCriteria": [],
+   "overrides": [],
+   "sideEffectsOnBranch": false,
+   "createdAt": "2026-09-28T11:00:48.269Z"
+  },
+  {
+   "rid": "at-f3329408f484",
+   "name": "setTriageStatus",
+   "description": "Set the triage status of ANY Triageable object (Part, WorkOrder, or future implementing types).",
+   "parameters": [
+    {
+     "name": "triageable",
+     "type": "interface-reference",
+     "interface": "Triageable",
+     "required": true
+    },
+    {
+     "name": "objectType",
+     "type": "string",
+     "required": true
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "required": true
+    }
+   ],
+   "rules": [
+    {
+     "kind": "modify",
+     "interface": "Triageable",
+     "typeParameter": "objectType",
+     "objectParameter": "triageable",
+     "propertyMap": {
+      "status": "status"
+     }
+    }
+   ],
+   "submissionCriteria": [],
+   "overrides": [],
+   "writeAuthorization": {
+    "requiredMarking": "SAFETY"
+   },
+   "sideEffectsOnBranch": false,
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "actionSubmissions": [
+  {
+   "ok": true,
+   "mode": "apply",
+   "actionType": "notifySafetyDesk",
+   "branch": "master",
+   "appliedEdits": [],
+   "trace": {
+    "resolves": [],
+    "overrides": [],
+    "checks": [
+     {
+      "ts": "2026-09-28T11:00:48.271Z",
+      "layer": "write-authorization",
+      "decision": "allow"
+     },
+     {
+      "ts": "2026-09-28T11:00:48.271Z",
+      "layer": "submission-criteria",
+      "decision": "allow",
+      "count": 0
+     }
+    ],
+    "criteria": [],
+    "rules": [
+     {
+      "ts": "2026-09-28T11:00:48.271Z",
+      "step": "ordering-validation",
+      "ok": true
+     }
+    ],
+    "effects": [
+     {
+      "ts": "2026-09-28T11:00:48.272Z",
+      "kind": "webhook",
+      "name": "safety-desk-inbox",
+      "executed": true,
+      "suppressed": false
+     }
+    ],
+    "edits": []
+   },
+   "ts": "2026-09-28T11:00:48.272Z"
+  }
+ ],
+ "webhookOutbox": [
+  {
+   "ts": "2026-09-28T11:00:48.272Z",
+   "action": "notifySafetyDesk",
+   "webhook": "safety-desk-inbox",
+   "branch": "master",
+   "params": {}
+  }
+ ],
+ "users": [
+  {
+   "id": "admin",
+   "name": "Platform Admin",
+   "kind": "human",
+   "markings": [
+    "PII",
+    "SAFETY"
+   ],
+   "clearance": 5,
+   "attributes": {
+    "role": "admin",
+    "base": "*"
+   }
+  },
+  {
+   "id": "maintenance_lead",
+   "name": "Dana (Maintenance Lead)",
+   "kind": "human",
+   "markings": [
+    "PII",
+    "SAFETY"
+   ],
+   "clearance": 3,
+   "attributes": {
+    "role": "manager",
+    "base": "JFK"
+   }
+  },
+  {
+   "id": "technician",
+   "name": "Sam (Technician)",
+   "kind": "human",
+   "markings": [
+    "SAFETY"
+   ],
+   "clearance": 2,
+   "attributes": {
+    "role": "tech",
+    "base": "JFK"
+   }
+  },
+  {
+   "id": "auditor",
+   "name": "Alex (Compliance Auditor)",
+   "kind": "human",
+   "markings": [
+    "PII"
+   ],
+   "clearance": 1,
+   "attributes": {
+    "role": "auditor",
+    "base": "*"
+   }
+  },
+  {
+   "id": "agent-atlas",
+   "name": "Atlas (maintenance copilot)",
+   "kind": "agent",
+   "markings": [
+    "SAFETY"
+   ],
+   "clearance": 2,
+   "attributes": {
+    "role": "agent"
+   },
+   "registeredAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "markings": [
+  {
+   "name": "PII",
+   "description": "Personally identifiable information",
+   "members": [
+    "maintenance_lead",
+    "admin",
+    "auditor"
+   ]
+  },
+  {
+   "name": "SAFETY",
+   "description": "Safety-critical maintenance data",
+   "members": [
+    "admin",
+    "maintenance_lead",
+    "technician",
+    "agent-atlas"
+   ]
+  }
+ ],
+ "policies": [],
+ "propPolicies": [],
+ "auditLog": [],
+ "workshopApps": [],
+ "savedAnalyses": [],
+ "agents": [
+  {
+   "id": "agent-atlas",
+   "name": "Atlas (maintenance copilot)",
+   "kind": "agent",
+   "markings": [
+    "SAFETY"
+   ],
+   "clearance": 2,
+   "attributes": {
+    "role": "agent"
+   },
+   "registeredAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "agentRuns": [],
+ "mcpApps": [
+  {
+   "rid": "app-0db992e21a7f",
+   "name": "maintenance-ops",
+   "description": "Scoped maintenance object queries and governed triage actions.",
+   "objectScopes": [
+    {
+     "objectType": "Part",
+     "properties": [
+      "part_id",
+      "part_name",
+      "base",
+      "status",
+      "severity",
+      "needs_action"
+     ]
+    },
+    {
+     "objectType": "WorkOrder",
+     "properties": [
+      "wo_id",
+      "part_id",
+      "issue",
+      "severity",
+      "status",
+      "due_date"
+     ]
+    }
+   ],
+   "actionTools": [
+    "setTriageStatus",
+    "closeWorkOrder"
+   ],
+   "allowedIdentities": [
+    "admin",
+    "maintenance_lead",
+    "technician",
+    "agent-atlas"
+   ],
+   "createdAt": "2026-09-28T11:00:48.271Z"
+  }
+ ],
+ "pmcpSessions": [],
+ "omcpCalls": [],
+ "bundles": [
+  {
+   "version": 1,
+   "rid": "bundle-598c92797dfe",
+   "ts": "2026-09-28T11:00:48.272Z",
+   "note": "v1: seeded aircraft maintenance workspace",
+   "counts": {
+    "objectTypes": 5,
+    "linkTypes": 4,
+    "functions": 1,
+    "actionTypes": 4,
+    "policies": 0,
+    "propPolicies": 0,
+    "markings": 2,
+    "users": 5,
+    "workshopApps": 0
+   },
+   "snapshot": {
+    "objectTypes": [
+     {
+      "rid": "ot-2fca0e867f3d",
+      "name": "Part",
+      "display": "Aircraft Part",
+      "primaryKey": "part_id",
+      "titleKey": "part_name",
+      "titleIndependent": true,
+      "properties": [
+       {
+        "name": "part_id",
+        "type": "string",
+        "backingColumn": "part_id"
+       },
+       {
+        "name": "part_name",
+        "type": "string",
+        "backingColumn": "part_name"
+       },
+       {
+        "name": "base",
+        "type": "string",
+        "backingColumn": "base"
+       },
+       {
+        "name": "status",
+        "type": "string",
+        "backingColumn": "status"
+       },
+       {
+        "name": "last_inspection",
+        "type": "string",
+        "backingColumn": "last_inspection"
+       },
+       {
+        "name": "days_since_inspection",
+        "type": "number",
+        "backingColumn": "days_since_inspection"
+       },
+       {
+        "name": "owner_email",
+        "type": "string",
+        "requiredMarking": "PII",
+        "backingColumn": "owner_email"
+       },
+       {
+        "name": "severity",
+        "type": "string",
+        "backingColumn": "severity"
+       },
+       {
+        "name": "wo_status",
+        "type": "string",
+        "backingColumn": "wo_status"
+       },
+       {
+        "name": "needs_action",
+        "type": "boolean",
+        "backingColumn": "needs_action"
+       }
+      ],
+      "markings": [
+       "SAFETY"
+      ],
+      "backing": {
+       "datasetRid": "ds-c3f579e90968",
+       "datasetName": "parts_enriched",
+       "mode": "batch"
+      },
+      "createdAt": "2026-09-28T11:00:48.268Z"
+     },
+     {
+      "rid": "ot-a83f1660eab7",
+      "name": "WorkOrder",
+      "display": "Maintenance Work Order",
+      "primaryKey": "wo_id",
+      "titleKey": "issue",
+      "titleIndependent": true,
+      "properties": [
+       {
+        "name": "wo_id",
+        "type": "string",
+        "backingColumn": "wo_id"
+       },
+       {
+        "name": "part_id",
+        "type": "string",
+        "backingColumn": "part_id"
+       },
+       {
+        "name": "issue",
+        "type": "string",
+        "backingColumn": "issue"
+       },
+       {
+        "name": "severity",
+        "type": "string",
+        "backingColumn": "severity"
+       },
+       {
+        "name": "due_date",
+        "type": "string",
+        "backingColumn": "due_date"
+       },
+       {
+        "name": "status",
+        "type": "string",
+        "backingColumn": "status"
+       },
+       {
+        "name": "resolution_note",
+        "type": "string",
+        "backingColumn": null
+       }
+      ],
+      "markings": [
+       "SAFETY"
+      ],
+      "backing": {
+       "datasetRid": "ds-3ed751a68cfe",
+       "datasetName": "work_orders_raw",
+       "mode": "batch"
+      },
+      "createdAt": "2026-09-28T11:00:48.268Z"
+     },
+     {
+      "rid": "ot-85c9e5d0f5b3",
+      "name": "Base",
+      "display": "Maintenance Base",
+      "primaryKey": "base_id",
+      "titleKey": "base_id",
+      "titleIndependent": false,
+      "properties": [
+       {
+        "name": "base_id",
+        "type": "string",
+        "backingColumn": "base_id"
+       },
+       {
+        "name": "region",
+        "type": "string",
+        "backingColumn": "region"
+       }
+      ],
+      "markings": [
+       "SAFETY"
+      ],
+      "backing": {
+       "datasetRid": "ds-a50139fb9310",
+       "datasetName": "bases_raw",
+       "mode": "batch"
+      },
+      "createdAt": "2026-09-28T11:00:48.270Z"
+     },
+     {
+      "rid": "ot-0e43f76e3541",
+      "name": "Technician",
+      "display": "Technician",
+      "primaryKey": "tech_id",
+      "titleKey": "tech_name",
+      "titleIndependent": true,
+      "properties": [
+       {
+        "name": "tech_id",
+        "type": "string",
+        "backingColumn": "tech_id"
+       },
+       {
+        "name": "tech_name",
+        "type": "string",
+        "backingColumn": "tech_name"
+       }
+      ],
+      "markings": [
+       "SAFETY"
+      ],
+      "backing": {
+       "datasetRid": "ds-1c1980f3ed73",
+       "datasetName": "technicians_raw",
+       "mode": "batch"
+      },
+      "createdAt": "2026-09-28T11:00:48.270Z"
+     },
+     {
+      "rid": "ot-28b61e933b3c",
+      "name": "MaintenanceVisit",
+      "display": "Maintenance Visit",
+      "primaryKey": "visit_id",
+      "titleKey": "visit_id",
+      "titleIndependent": false,
+      "properties": [
+       {
+        "name": "visit_id",
+        "type": "string",
+        "backingColumn": "visit_id"
+       },
+       {
+        "name": "part_pk",
+        "type": "string",
+        "backingColumn": "part_pk"
+       },
+       {
+        "name": "tech_pk",
+        "type": "string",
+        "backingColumn": "tech_pk"
+       },
+       {
+        "name": "visit_date",
+        "type": "string",
+        "backingColumn": "visit_date"
+       }
+      ],
+      "markings": [
+       "SAFETY"
+      ],
+      "backing": {
+       "datasetRid": "ds-2a30cffd8278",
+       "datasetName": "visits_raw",
+       "mode": "batch"
+      },
+      "createdAt": "2026-09-28T11:00:48.270Z"
+     }
+    ],
+    "linkTypes": [
+     {
+      "rid": "lt-e5e6c4fe412f",
+      "name": "PartWorkOrders",
+      "fromType": "Part",
+      "toType": "WorkOrder",
+      "cardinality": "one-to-many",
+      "createdAt": "2026-09-28T11:00:48.268Z"
+     },
+     {
+      "rid": "lt-d05ed030f2be",
+      "name": "WorkOrderPart",
+      "fromType": "WorkOrder",
+      "toType": "Part",
+      "cardinality": "many-to-one",
+      "backing": {
+       "kind": "foreign_key",
+       "fkProperty": "part_id",
+       "fkColumn": "part_id",
+       "referencesPrimaryKey": "part_id"
+      },
+      "latencyTier": "derived-instant",
+      "createdAt": "2026-09-28T11:00:48.270Z"
+     },
+     {
+      "rid": "lt-b5f7eeaa8008",
+      "name": "WorkOrderAssignees",
+      "fromType": "WorkOrder",
+      "toType": "Technician",
+      "cardinality": "many-to-many",
+      "backing": {
+       "kind": "join_table",
+       "joinTableDataset": "wo_assignments",
+       "leftColumn": "wo_pk",
+       "rightColumn": "tech_pk"
+      },
+      "latencyTier": "batch-cadence",
+      "createdAt": "2026-09-28T11:00:48.270Z",
+      "lastSyncTxRid": "tx-21aa31477a9c"
+     },
+     {
+      "rid": "lt-a5fd9ab81001",
+      "name": "PartVisits",
+      "fromType": "Part",
+      "toType": "MaintenanceVisit",
+      "cardinality": "many-to-many",
+      "backing": {
+       "kind": "object_backed",
+       "manifestObjectType": "MaintenanceVisit",
+       "leftProperty": "part_pk",
+       "rightProperty": "visit_id"
+      },
+      "latencyTier": "batch-cadence",
+      "createdAt": "2026-09-28T11:00:48.270Z",
+      "lastSyncTxRid": "tx-c85f4805791b"
+     }
+    ],
+    "functions": [
+     {
+      "rid": "fn-21b9e8bb7d0d",
+      "name": "triagePart",
+      "description": "Escalate a part to needs_review, create a work order, and link them.",
+      "params": [
+       {
+        "name": "partId",
+        "type": "string",
+        "required": true
+       },
+       {
+        "name": "reason",
+        "type": "string",
+        "required": true
+       }
+      ],
+      "steps": [
+       {
+        "op": "get",
+        "type": "Part",
+        "pk": {
+         "$param": "partId"
+        },
+        "as": "part"
+       },
+       {
+        "op": "require",
+        "expression": "part != null",
+        "message": "Part not found"
+       },
+       {
+        "op": "modify",
+        "type": "Part",
+        "pk": {
+         "$ref": "part.part_id"
+        },
+        "patch": {
+         "status": "needs_review"
+        }
+       },
+       {
+        "op": "generate_id",
+        "as": "woId",
+        "prefix": "WO-"
+       },
+       {
+        "op": "create",
+        "type": "WorkOrder",
+        "values": {
+         "wo_id": {
+          "$ref": "woId"
+         },
+         "part_id": {
+          "$ref": "part.part_id"
+         },
+         "issue": {
+          "$param": "reason"
+         },
+         "severity": "high",
+         "due_date": "2026-12-01"
+        }
+       },
+       {
+        "op": "link",
+        "link": "PartWorkOrders",
+        "from": {
+         "$ref": "part.part_id"
+        },
+        "to": {
+         "$ref": "woId"
+        }
+       },
+       {
+        "op": "log",
+        "values": [
+         "triaged ",
+         {
+          "$ref": "part.part_id"
+         },
+         " with new work order ",
+         {
+          "$ref": "woId"
+         }
+        ]
+       }
+      ],
+      "result": {
+       "escalated": {
+        "$ref": "part.part_id"
+       },
+       "workOrder": {
+        "$ref": "woId"
+       }
+      },
+      "createdAt": "2026-09-28T11:00:48.269Z"
+     }
+    ],
+    "actionTypes": [
+     {
+      "rid": "at-88b2ad3a43a0",
+      "name": "closeWorkOrder",
+      "description": "Mark a work order closed and update the part status.",
+      "parameters": [
+       {
+        "name": "workOrder",
+        "type": "object-reference",
+        "objectType": "WorkOrder",
+        "required": true
+       },
+       {
+        "name": "resolution",
+        "type": "string",
+        "required": true
+       },
+       {
+        "name": "justification",
+        "type": "string",
+        "required": false
+       }
+      ],
+      "rules": [
+       {
+        "kind": "modify",
+        "objectParameter": "workOrder",
+        "propertyMap": {
+         "status": {
+          "kind": "static",
+          "value": "CLOSED"
+         },
+         "resolution_note": {
+          "kind": "fromParameter",
+          "param": "resolution"
+         }
+        }
+       }
+      ],
+      "submissionCriteria": [
+       {
+        "expr": "resolution != \"\"",
+        "errorMessage": "Provide a resolution before closing."
+       },
+       {
+        "expr": "workOrder.severity != \"high\" or justification",
+        "errorMessage": "Closing a high-severity work order requires a written justification."
+       }
+      ],
+      "overrides": [
+       {
+        "name": "manager justification override",
+        "conditions": [
+         {
+          "expr": "user.attributes.role == \"manager\""
+         }
+        ],
+        "then": [
+         {
+          "param": "justification",
+          "required": true,
+          "visible": true
+         }
+        ]
+       }
+      ],
+      "writeAuthorization": {
+       "requiredMarking": "SAFETY"
+      },
+      "sideEffectsOnBranch": false,
+      "createdAt": "2026-09-28T11:00:48.269Z"
+     },
+     {
+      "rid": "at-a92d18bab5c3",
+      "name": "escalatePart",
+      "description": "Escalate a part: flip status and notify safety ops.",
+      "parameters": [
+       {
+        "name": "part",
+        "type": "object-reference",
+        "objectType": "Part",
+        "required": true
+       },
+       {
+        "name": "note",
+        "type": "string",
+        "required": false
+       }
+      ],
+      "rules": [
+       {
+        "kind": "function",
+        "function": "triagePart",
+        "paramMap": {
+         "partId": "part",
+         "reason": {
+          "kind": "static",
+          "value": "Escalated via escalatePart action"
+         }
+        }
+       }
+      ],
+      "submissionCriteria": [],
+      "overrides": [],
+      "writeAuthorization": {
+       "requiredMarking": "SAFETY"
+      },
+      "sideEffectsOnBranch": false,
+      "createdAt": "2026-09-28T11:00:48.269Z"
+     },
+     {
+      "rid": "at-8ae7cbf250b4",
+      "name": "notifySafetyDesk",
+      "description": "Fire the safety-desk webhook (used to demo branch suppression).",
+      "parameters": [],
+      "rules": [
+       {
+        "kind": "webhook",
+        "webhookName": "safety-desk-inbox"
+       }
+      ],
+      "submissionCriteria": [],
+      "overrides": [],
+      "sideEffectsOnBranch": false,
+      "createdAt": "2026-09-28T11:00:48.269Z"
+     },
+     {
+      "rid": "at-f3329408f484",
+      "name": "setTriageStatus",
+      "description": "Set the triage status of ANY Triageable object (Part, WorkOrder, or future implementing types).",
+      "parameters": [
+       {
+        "name": "triageable",
+        "type": "interface-reference",
+        "interface": "Triageable",
+        "required": true
+       },
+       {
+        "name": "objectType",
+        "type": "string",
+        "required": true
+       },
+       {
+        "name": "status",
+        "type": "string",
+        "required": true
+       }
+      ],
+      "rules": [
+       {
+        "kind": "modify",
+        "interface": "Triageable",
+        "typeParameter": "objectType",
+        "objectParameter": "triageable",
+        "propertyMap": {
+         "status": "status"
+        }
+       }
+      ],
+      "submissionCriteria": [],
+      "overrides": [],
+      "writeAuthorization": {
+       "requiredMarking": "SAFETY"
+      },
+      "sideEffectsOnBranch": false,
+      "createdAt": "2026-09-28T11:00:48.271Z"
+     }
+    ],
+    "policies": [],
+    "propPolicies": [],
+    "markings": [
+     {
+      "name": "PII",
+      "description": "Personally identifiable information",
+      "members": [
+       "maintenance_lead",
+       "admin",
+       "auditor"
+      ]
+     },
+     {
+      "name": "SAFETY",
+      "description": "Safety-critical maintenance data",
+      "members": [
+       "admin",
+       "maintenance_lead",
+       "technician",
+       "agent-atlas"
+      ]
+     }
+    ],
+    "users": [
+     {
+      "id": "admin",
+      "name": "Platform Admin",
+      "kind": "human",
+      "markings": [
+       "PII",
+       "SAFETY"
+      ],
+      "clearance": 5,
+      "attributes": {
+       "role": "admin",
+       "base": "*"
+      }
+     },
+     {
+      "id": "maintenance_lead",
+      "name": "Dana (Maintenance Lead)",
+      "kind": "human",
+      "markings": [
+       "PII",
+       "SAFETY"
+      ],
+      "clearance": 3,
+      "attributes": {
+       "role": "manager",
+       "base": "JFK"
+      }
+     },
+     {
+      "id": "technician",
+      "name": "Sam (Technician)",
+      "kind": "human",
+      "markings": [
+       "SAFETY"
+      ],
+      "clearance": 2,
+      "attributes": {
+       "role": "tech",
+       "base": "JFK"
+      }
+     },
+     {
+      "id": "auditor",
+      "name": "Alex (Compliance Auditor)",
+      "kind": "human",
+      "markings": [
+       "PII"
+      ],
+      "clearance": 1,
+      "attributes": {
+       "role": "auditor",
+       "base": "*"
+      }
+     },
+     {
+      "id": "agent-atlas",
+      "name": "Atlas (maintenance copilot)",
+      "kind": "agent",
+      "markings": [
+       "SAFETY"
+      ],
+      "clearance": 2,
+      "attributes": {
+       "role": "agent"
+      },
+      "registeredAt": "2026-09-28T11:00:48.271Z"
+     }
+    ],
+    "workshopApps": []
+   }
+  }
+ ]
+}
